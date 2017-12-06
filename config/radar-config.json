@@ -1,0 +1,9 @@
+{
+    "radars": [
+        { "name": "Custom Dev", "gsheetUrl": "https://docs.google.com/spreadsheets/d/1ltaGW2or4Y5js-bTt3XtNrwWn0-WBXs18pZeSKZ_k6g/edit" },
+        { "name": "Dynamics 365", "gsheetUrl": "https://docs.google.com/spreadsheets/d/1NtY86gCQInH1IhOeh7hBxoHjiyuWOyBQN8JaOHGgyVs/edit" },
+        { "name": "Oracle", "gsheetUrl": "https://docs.google.com/spreadsheets/d/1jJtaMSGhftoNGH6aLVVmNqm85BgaIk1KYQKkjIWCcww/edit" },
+        { "name": "BI", "gsheetUrl": "https://docs.google.com/spreadsheets/d/1N5PadBxaGGko5iZlfLpuuO4MoIrO65xyaRJW2PQV9q8/edit" },
+        { "name": "Service Now", "gsheetUrl": "https://docs.google.com/spreadsheets/d/169NnVfDlOta7Dnx9vrOBZlNxovK7c6eQth-YAL2OE_s/edit" }
+    ]
+}
