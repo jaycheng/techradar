@@ -114,7 +114,7 @@ IF EXIST "%DEPLOYMENT_TEMP%\webpack.config.js" (
 )
 
 echo Deploying files...
-rm -rf %DEPLOYMENT_TARGET%
+rm -rf %DEPLOYMENT_TARGET%\*
 xcopy %DEPLOYMENT_TEMP%\dist %DEPLOYMENT_TARGET% /Y
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
