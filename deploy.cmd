@@ -113,8 +113,10 @@ IF EXIST "%DEPLOYMENT_TEMP%\webpack.config.js" (
   popd
 )
 
+:: 5. Deploy
 echo Deploying files...
-rm -rf %DEPLOYMENT_TARGET%\*
+del /q %DEPLOYMENT_TARGET%\*
+FOR /D %%p IN ("%DEPLOYMENT_TARGET%\*.*") DO rmdir "%%p" /s /q
 xcopy %DEPLOYMENT_TEMP%\dist %DEPLOYMENT_TARGET% /Y /E
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
