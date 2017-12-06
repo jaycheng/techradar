@@ -90,7 +90,7 @@ echo Handling node.js deployment.
 
 :: 1. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
+  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TEMP%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
@@ -98,20 +98,23 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
 call :SelectNodeVersion
 
 :: 3. Install npm packages
-IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
+IF EXIST "%DEPLOYMENT_TEMP%\package.json" (
+  pushd "%DEPLOYMENT_TEMP%"
   call :ExecuteCmd !NPM_CMD! install 
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
 
 :: 4. webpack
-IF EXIST "%DEPLOYMENT_TARGET%\webpack.config.js" (
-  pushd "%DEPLOYMENT_TARGET%"
+IF EXIST "%DEPLOYMENT_TEMP%\webpack.config.js" (
+  pushd "%DEPLOYMENT_TEMP%"
   call :ExecuteCmd !NPM_CMD! run build
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
+
+echo Deploying files...
+xcopy %DEPLOYMENT_TEMP%\dist %DEPLOYMENT_TARGET% /Y
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
